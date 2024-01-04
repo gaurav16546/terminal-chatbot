@@ -1,3 +1,9 @@
 # terminal-chatbot
-Creating the chatbot using python and chatterbot
-Idea: Using webscrab to get data for training
+
+Creating chatbot using Python and Chatterbot.
+Preferred Python version: anything less tha 3.8, paticularly use 3.7.9
+Use [chatterbot](https://chatterbot.readthedocs.io/en/stable/) version 1.0.4
+Using the command **pip -r requirements.txt** to install all the required dependencies.
+Since, we will use the chatbot in the terminal so no need for user interface or website. Or maybe we will add interface if we have enough time.
+
+To train the chatbot , refer to[here](https://chatterbot.readthedocs.io/en/stable/training.html) or [here](https://chatterbot.readthedocs.io/en/stable/corpus.html)
