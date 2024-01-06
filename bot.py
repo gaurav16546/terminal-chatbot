@@ -4,6 +4,7 @@ import logging
 from chatterbot.trainers import UbuntuCorpusTrainer
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.conversation import Statement
 from cleaner import clean_corpus
 from give_feedback import feedback_loop
 from bot_program import bot_program
@@ -12,7 +13,7 @@ from bot_program import bot_program
 logging.basicConfig(level=logging.INFO)
 chattbot = ChatBot(
     "Chatpot",
-    filters=[filters.get_recent_repeated_responses],
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
     logic_adapters=[
          {
             'import_path': 'chatterbot.logic.SpecificResponseAdapter',
@@ -22,13 +23,14 @@ chattbot = ChatBot(
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'I am sorry, but I do not understand.',
-            'maximum_similarity_threshold': 0.90
+            # 'maximum_similarity_threshold': 0.90
         },
                     "chatterbot.logic.UnitConversion",
                     'chatterbot.logic.MathematicalEvaluation',
     ]
 )
-trainer = UbuntuCorpusTrainer(chattbot)
+
+trainer = ListTrainer(chattbot)
 corpus_trainer = ChatterBotCorpusTrainer(chattbot)
 corpus_trainer.train(
     "chatterbot.corpus.english.conversations",
@@ -47,6 +49,6 @@ choice = input()
 if(choice == '1'):
     bot_program(chattbot)
 elif(choice == '2'):
-    feedback_loop(chattbot)
+    feedback_loop(chattbot,trainer)
 else:
     print("Invalid input")
