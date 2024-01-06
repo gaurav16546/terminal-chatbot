@@ -5,6 +5,8 @@ from chatterbot.trainers import UbuntuCorpusTrainer
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from cleaner import clean_corpus
+from give_feedback import feedback_loop
+from bot_program import bot_program
 
 # CORPUS_FILE = "chat.txt"
 logging.basicConfig(level=logging.INFO)
@@ -24,7 +26,6 @@ chattbot = ChatBot(
         },
                     "chatterbot.logic.UnitConversion",
                     'chatterbot.logic.MathematicalEvaluation',
-                    'chatterbot.logic.TimeLogicAdapter',
     ]
 )
 trainer = UbuntuCorpusTrainer(chattbot)
@@ -39,14 +40,13 @@ corpus_trainer.train(
 # trainer = ListTrainer(chatbot)
 # cleaned_corpus = clean_corpus(CORPUS_FILE)
 # trainer.train(cleaned_corpus)
-while True:
-    try:
-        user_input = input(f"🤔")
 
-        bot_response = chattbot.get_response(user_input)
-
-        print(f"🤖 {bot_response}")
-
-    # Press ctrl-c or ctrl-d on the keyboard to exit
-    except (KeyboardInterrupt, EOFError, SystemExit):
-        break
+print("Enter whether you want to run simple program or want to run feedback program?")
+print("1 for simple program\n2 for feedback program")
+choice = input()
+if(choice == '1'):
+    bot_program(chattbot)
+elif(choice == '2'):
+    feedback_loop(chattbot)
+else:
+    print("Invalid input")
