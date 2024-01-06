@@ -23,9 +23,7 @@ corpus_trainer.train(
     "chatterbot.corpus.english.conversations",
     "chatterbot.corpus.english.greetings",
     "chatterbot.corpus.english.science",
-    "chatterbot.corpus.english.computers",
-    "chatterbot.corpus.english.emotion",
-    "chatterbot.corpus.english.humor")
+    "chatterbot.corpus.english.computers",)
 
 # trainer = ListTrainer(chatbot)
 # cleaned_corpus = clean_corpus(CORPUS_FILE)
